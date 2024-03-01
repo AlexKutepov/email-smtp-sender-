@@ -28,45 +28,7 @@ namespace EmailSender
 
         private async void sendButton_Click(object sender, EventArgs e)
         {
-            if (!ValidateInputs())
-                return;
 
-            try
-            {
-                progressBar.Maximum = recipients.Count;
-                progressBar.Value = 0;
-
-                var successCount = 0;
-                var errorCount = 0;
-
-                int delayMilliseconds = recipients.Count > 50 ? delaySeconds * 1000 : 0; // Если адресов больше 50, устанавливаем задержку, иначе 0
-
-                foreach (var recipient in recipients)
-                {
-                    if (delayMilliseconds > 0)
-                        await Task.Delay(delayMilliseconds); // Задержка между отправкой 50 сообщений в 1 час
-
-                    try
-                    {
-                        await SendEmailAsync(recipient);
-                        successCount++;
-                        WriteToFile("good.txt", recipient);
-                    }
-                    catch (Exception ex)
-                    {
-                        errorCount++;
-                        WriteToFile("bad.txt", $"{recipient}: {ex.Message}");
-                    }
-
-                    progressBar.Value++;
-                }
-
-                MessageBox.Show($"Emails sent successfully: {successCount}, Failed: {errorCount}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to send emails: {ex.Message}");
-            }
         }
 
 
@@ -118,11 +80,16 @@ namespace EmailSender
 
         private bool ValidateInputs()
         {
-            if (!File.Exists(csvFileTextBox.Text))
+
+            string csvFilePath = Path.Combine(Application.StartupPath, csvFileTextBox.Text);
+
+            if (!File.Exists(csvFilePath))
             {
                 MessageBox.Show("CSV file does not exist.");
                 return false;
             }
+
+
 
             if (string.IsNullOrWhiteSpace(fromNameTextBox.Text) || string.IsNullOrWhiteSpace(fromAddressTextBox.Text))
             {
@@ -175,7 +142,12 @@ namespace EmailSender
                     var line = reader.ReadLine();
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        recipients.Add(line.Trim());
+                        // Разделяем строку по запятой и добавляем каждый адрес в список
+                        var emails = line.Split(',');
+                        foreach (var email in emails)
+                        {
+                            recipients.Add(email.Trim());
+                        }
                     }
                 }
             }
@@ -185,6 +157,56 @@ namespace EmailSender
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void progressBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void sendButton_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Lets send");
+            if (!ValidateInputs())
+
+                return;
+
+            try
+            {
+                progressBar.Maximum = recipients.Count;
+                progressBar.Value = 0;
+
+                var successCount = 0;
+                var errorCount = 0;
+
+                int delayMilliseconds = recipients.Count > 50 ? delaySeconds * 1000 : 0; // Если адресов больше 50, устанавливаем задержку, иначе 0
+
+                foreach (var recipient in recipients)
+                {
+                    if (delayMilliseconds > 0)
+                        await Task.Delay(delayMilliseconds); // Задержка между отправкой 50 сообщений в 1 час
+
+                    try
+                    {
+                        await SendEmailAsync(recipient);
+                        successCount++;
+                        WriteToFile("good.txt", recipient);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorCount++;
+                        WriteToFile("bad.txt", $"{recipient}: {ex.Message}");
+                    }
+
+                    progressBar.Value++;
+                }
+
+                MessageBox.Show($"Emails sent successfully: {successCount}, Failed: {errorCount}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to send emails: {ex.Message}");
+            }
         }
     }
 }

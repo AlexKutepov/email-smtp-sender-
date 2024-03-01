@@ -44,17 +44,20 @@ namespace EmailSender
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(0, 0);
+            this.progressBar.Location = new System.Drawing.Point(8, 432);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(100, 23);
+            this.progressBar.Size = new System.Drawing.Size(443, 23);
             this.progressBar.TabIndex = 12;
+            this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(0, 0);
+            this.sendButton.Location = new System.Drawing.Point(33, 403);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(75, 23);
             this.sendButton.TabIndex = 11;
+            this.sendButton.Text = "send";
+            this.sendButton.Click += new System.EventHandler(this.sendButton_Click_1);
             // 
             // fromNameTextBox
             // 
