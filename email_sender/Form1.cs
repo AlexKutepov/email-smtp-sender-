@@ -75,6 +75,11 @@ namespace EmailSender
 
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
+                // Увеличиваем счетчик успешно отправленных писем
+                successCount++;
+
+                // Обновляем текст компонента Label с текущим значением счетчика
+                UpdateSuccessCountLabel();
             }
         }
 
@@ -135,24 +140,42 @@ namespace EmailSender
         private List<string> LoadRecipients(string filePath)
         {
             var recipients = new List<string>();
-            using (var reader = new StreamReader(filePath))
+            try
             {
-                while (!reader.EndOfStream)
+                using (var reader = new StreamReader(filePath))
                 {
-                    var line = reader.ReadLine();
-                    if (!string.IsNullOrWhiteSpace(line))
+                    while (!reader.EndOfStream)
                     {
-                        // Разделяем строку по запятой и добавляем каждый адрес в список
-                        var emails = line.Split(',');
-                        foreach (var email in emails)
+                        var line = reader.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(line))
                         {
-                            recipients.Add(email.Trim());
+                            var emails = line.Split(',');
+                            foreach (var email in emails)
+                            {
+                                try
+                                {
+                                    var trimmedEmail = email.Trim();
+                                    // Проверяем, является ли адрес электронной почты допустимым
+                                    var addr = new System.Net.Mail.MailAddress(trimmedEmail);
+                                    recipients.Add(trimmedEmail);
+                                }
+                                catch (FormatException)
+                                {
+                                    // Если адрес электронной почты недопустимый, пропускаем его
+                                    continue;
+                                }
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while loading recipients: {ex.Message}");
+            }
             return recipients;
         }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -162,6 +185,12 @@ namespace EmailSender
         private void progressBar_Click(object sender, EventArgs e)
         {
 
+        }
+        private int successCount = 0;
+        private void UpdateSuccessCountLabel()
+        {
+            // Обновляем текст компонента Label с текущим значением счетчика
+            successCountLabel.Text = $"Successfully sent: {successCount}";
         }
 
         private async void sendButton_Click_1(object sender, EventArgs e)

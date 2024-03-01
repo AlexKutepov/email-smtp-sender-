@@ -40,6 +40,7 @@ namespace EmailSender
             this.smtpPortTextBox = new System.Windows.Forms.TextBox();
             this.smtpUsernameTextBox = new System.Windows.Forms.TextBox();
             this.smtpPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.successCountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar
@@ -131,9 +132,19 @@ namespace EmailSender
             this.smtpPasswordTextBox.Size = new System.Drawing.Size(100, 20);
             this.smtpPasswordTextBox.TabIndex = 10;
             // 
+            // successCountLabel
+            // 
+            this.successCountLabel.AutoSize = true;
+            this.successCountLabel.Location = new System.Drawing.Point(314, 12);
+            this.successCountLabel.Name = "successCountLabel";
+            this.successCountLabel.Size = new System.Drawing.Size(13, 13);
+            this.successCountLabel.TabIndex = 13;
+            this.successCountLabel.Text = "0";
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.successCountLabel);
             this.Controls.Add(this.smtpPasswordTextBox);
             this.Controls.Add(this.smtpUsernameTextBox);
             this.Controls.Add(this.smtpPortTextBox);
@@ -166,6 +177,7 @@ namespace EmailSender
         private System.Windows.Forms.TextBox smtpPortTextBox;
         private System.Windows.Forms.TextBox smtpUsernameTextBox;
         private System.Windows.Forms.TextBox smtpPasswordTextBox;
+        private System.Windows.Forms.Label successCountLabel;
     }
 }
 
