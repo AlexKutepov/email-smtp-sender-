@@ -32,26 +32,29 @@ namespace EmailSender
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.sendButton = new System.Windows.Forms.Button();
             this.fromNameTextBox = new System.Windows.Forms.TextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.messageTextBox = new System.Windows.Forms.RichTextBox();
             this.fromAddressTextBox = new System.Windows.Forms.TextBox();
             this.subjectTextBox = new System.Windows.Forms.TextBox();
+            this.csvFileTextBox = new System.Windows.Forms.TextBox();
+            this.smtpHostTextBox = new System.Windows.Forms.TextBox();
+            this.smtpPortTextBox = new System.Windows.Forms.TextBox();
+            this.smtpUsernameTextBox = new System.Windows.Forms.TextBox();
+            this.smtpPasswordTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(33, 383);
+            this.progressBar.Location = new System.Drawing.Point(0, 0);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(404, 23);
-            this.progressBar.TabIndex = 0;
+            this.progressBar.Size = new System.Drawing.Size(100, 23);
+            this.progressBar.TabIndex = 12;
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(175, 426);
+            this.sendButton.Location = new System.Drawing.Point(0, 0);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(75, 23);
-            this.sendButton.TabIndex = 1;
-            this.sendButton.Text = "send";
-            this.sendButton.UseVisualStyleBackColor = true;
+            this.sendButton.TabIndex = 11;
             // 
             // fromNameTextBox
             // 
@@ -61,13 +64,13 @@ namespace EmailSender
             this.fromNameTextBox.TabIndex = 2;
             this.fromNameTextBox.Text = "Александр";
             // 
-            // richTextBox1
+            // messageTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(33, 137);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(404, 240);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.messageTextBox.Location = new System.Drawing.Point(33, 137);
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.Size = new System.Drawing.Size(404, 240);
+            this.messageTextBox.TabIndex = 3;
+            this.messageTextBox.Text = "Тестовое сообщение";
             // 
             // fromAddressTextBox
             // 
@@ -86,12 +89,56 @@ namespace EmailSender
             this.subjectTextBox.Text = "Добрый день";
             this.subjectTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // csvFileTextBox
+            // 
+            this.csvFileTextBox.Location = new System.Drawing.Point(33, 92);
+            this.csvFileTextBox.Name = "csvFileTextBox";
+            this.csvFileTextBox.Size = new System.Drawing.Size(160, 20);
+            this.csvFileTextBox.TabIndex = 6;
+            this.csvFileTextBox.Text = "example_base (1).csv";
+            // 
+            // smtpHostTextBox
+            // 
+            this.smtpHostTextBox.Location = new System.Drawing.Point(193, 11);
+            this.smtpHostTextBox.Name = "smtpHostTextBox";
+            this.smtpHostTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpHostTextBox.TabIndex = 7;
+            this.smtpHostTextBox.Text = "smtp-pulse.com";
+            // 
+            // smtpPortTextBox
+            // 
+            this.smtpPortTextBox.Location = new System.Drawing.Point(193, 37);
+            this.smtpPortTextBox.Name = "smtpPortTextBox";
+            this.smtpPortTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpPortTextBox.TabIndex = 8;
+            this.smtpPortTextBox.Text = "2525";
+            // 
+            // smtpUsernameTextBox
+            // 
+            this.smtpUsernameTextBox.Location = new System.Drawing.Point(193, 64);
+            this.smtpUsernameTextBox.Name = "smtpUsernameTextBox";
+            this.smtpUsernameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpUsernameTextBox.TabIndex = 9;
+            this.smtpUsernameTextBox.Text = "contact@astar-it.com";
+            // 
+            // smtpPasswordTextBox
+            // 
+            this.smtpPasswordTextBox.Location = new System.Drawing.Point(200, 91);
+            this.smtpPasswordTextBox.Name = "smtpPasswordTextBox";
+            this.smtpPasswordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpPasswordTextBox.TabIndex = 10;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.smtpPasswordTextBox);
+            this.Controls.Add(this.smtpUsernameTextBox);
+            this.Controls.Add(this.smtpPortTextBox);
+            this.Controls.Add(this.smtpHostTextBox);
+            this.Controls.Add(this.csvFileTextBox);
             this.Controls.Add(this.subjectTextBox);
             this.Controls.Add(this.fromAddressTextBox);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.messageTextBox);
             this.Controls.Add(this.fromNameTextBox);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.progressBar);
@@ -108,9 +155,14 @@ namespace EmailSender
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox fromNameTextBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox messageTextBox;
         private System.Windows.Forms.TextBox fromAddressTextBox;
         private System.Windows.Forms.TextBox subjectTextBox;
+        private System.Windows.Forms.TextBox csvFileTextBox;
+        private System.Windows.Forms.TextBox smtpHostTextBox;
+        private System.Windows.Forms.TextBox smtpPortTextBox;
+        private System.Windows.Forms.TextBox smtpUsernameTextBox;
+        private System.Windows.Forms.TextBox smtpPasswordTextBox;
     }
 }
 
