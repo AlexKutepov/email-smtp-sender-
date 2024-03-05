@@ -42,6 +42,11 @@ namespace EmailSender
             this.smtpUsernameTextBox = new System.Windows.Forms.TextBox();
             this.smtpPasswordTextBox = new System.Windows.Forms.TextBox();
             this.successCountLabel = new System.Windows.Forms.Label();
+            this.messageRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
@@ -76,6 +81,7 @@ namespace EmailSender
             this.messageTextBox.Size = new System.Drawing.Size(404, 240);
             this.messageTextBox.TabIndex = 3;
             this.messageTextBox.Text = resources.GetString("messageTextBox.Text");
+            this.messageTextBox.TextChanged += new System.EventHandler(this.messageTextBox_TextChanged);
             // 
             // fromAddressTextBox
             // 
@@ -142,9 +148,47 @@ namespace EmailSender
             this.successCountLabel.TabIndex = 13;
             this.successCountLabel.Text = "0";
             // 
+            // messageRichTextBox
+            // 
+            this.messageRichTextBox.Location = new System.Drawing.Point(455, 31);
+            this.messageRichTextBox.Name = "messageRichTextBox";
+            this.messageRichTextBox.Size = new System.Drawing.Size(317, 418);
+            this.messageRichTextBox.TabIndex = 14;
+            this.messageRichTextBox.Text = "";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(455, 8);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(175, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Пиьсма из листа, а не из cvs";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(33, 118);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(147, 17);
+            this.checkBox2.TabIndex = 16;
+            this.checkBox2.Text = "Пиьсма из Txt,а не CVS";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.messageRichTextBox);
             this.Controls.Add(this.successCountLabel);
             this.Controls.Add(this.smtpPasswordTextBox);
             this.Controls.Add(this.smtpUsernameTextBox);
@@ -158,6 +202,8 @@ namespace EmailSender
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.progressBar);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,6 +225,10 @@ namespace EmailSender
         private System.Windows.Forms.TextBox smtpUsernameTextBox;
         private System.Windows.Forms.TextBox smtpPasswordTextBox;
         private System.Windows.Forms.Label successCountLabel;
+        private System.Windows.Forms.RichTextBox messageRichTextBox;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 

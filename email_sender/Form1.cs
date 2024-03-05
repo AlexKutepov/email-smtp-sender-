@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using System.Text.RegularExpressions;
 
 namespace EmailSender
 {
@@ -25,12 +26,6 @@ namespace EmailSender
         {
             InitializeComponent();
         }
-
-        private async void sendButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void WriteToFile(string filePath, string text)
         {
@@ -88,7 +83,7 @@ namespace EmailSender
 
             string csvFilePath = Path.Combine(Application.StartupPath, csvFileTextBox.Text);
 
-            if (!File.Exists(csvFilePath))
+            if (!File.Exists(csvFilePath) && !useRichTextBox)
             {
                 MessageBox.Show("CSV file does not exist.");
                 return false;
@@ -136,11 +131,41 @@ namespace EmailSender
 
             return true;
         }
-
+        public bool useRichTextBox = false;
+        public bool useRichTextBoxTxt = false;
         private List<string> LoadRecipients(string filePath)
         {
             var recipients = new List<string>();
-            try
+
+            // Проверяем, следует ли использовать RichTextBox
+            if (useRichTextBox)
+            {
+                // Если выбрано использование RichTextBox, читаем адреса построчно из RichTextBox
+                string[] lines = messageRichTextBox.Lines;
+                foreach (string line in lines)
+                {
+                    // Пропускаем пустые строки
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        // Используем регулярное выражение для поиска адреса электронной почты в строке
+                        Match match = Regex.Match(line.Trim(), @"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b", RegexOptions.IgnoreCase);
+                        if (match.Success)
+                        {
+                            // Если найден адрес электронной почты, добавляем его в список
+                            recipients.Add(match.Value);
+                        }
+                        else
+                        {
+                            // Если адрес электронной почты не найден в строке, выводим сообщение об ошибке или проигнорируем строку
+                            MessageBox.Show($"Ошибка: Неверный формат адреса электронной почты в строке: {line}");
+                        }
+                    }
+                }
+             
+                return recipients; 
+            }
+
+            else if (useRichTextBoxTxt)
             {
                 using (var reader = new StreamReader(filePath))
                 {
@@ -149,30 +174,56 @@ namespace EmailSender
                         var line = reader.ReadLine();
                         if (!string.IsNullOrWhiteSpace(line))
                         {
-                            var emails = line.Split(',');
-                            foreach (var email in emails)
+                            try
                             {
-                                try
-                                {
-                                    var trimmedEmail = email.Trim();
-                                    // Проверяем, является ли адрес электронной почты допустимым
-                                    var addr = new System.Net.Mail.MailAddress(trimmedEmail);
-                                    recipients.Add(trimmedEmail);
-                                }
-                                catch (FormatException)
-                                {
-                                    // Если адрес электронной почты недопустимый, пропускаем его
-                                    continue;
-                                }
+                                // Добавляем адрес только в случае успешного парсинга
+                                recipients.Add(line.Trim());
+                            }
+                            catch (Exception ex)
+                            {
+                                // Если произошла ошибка при парсинге, выводим сообщение об ошибке
+                                MessageBox.Show($"Error parsing line: {line}. Skipping to the next line. Error: {ex.Message}");
                             }
                         }
                     }
                 }
+                return recipients; 
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error while loading recipients: {ex.Message}");
-            }
+            else
+                try
+                {
+                    using (var reader = new StreamReader(filePath))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            if (!string.IsNullOrWhiteSpace(line))
+                            {
+                                var emails = line.Split(',');
+                                foreach (var email in emails)
+                                {
+                                    try
+                                    {
+                                        var trimmedEmail = email.Trim();
+                                        // Проверяем, является ли адрес электронной почты допустимым
+                                        var addr = new System.Net.Mail.MailAddress(trimmedEmail);
+                                        recipients.Add(trimmedEmail);
+                                    }
+                                    catch (FormatException)
+                                    {
+                                        // Если адрес электронной почты недопустимый, пропускаем его
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        return recipients;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error while loading recipients: {ex.Message}");
+                }
             return recipients;
         }
 
@@ -197,7 +248,6 @@ namespace EmailSender
         {
             MessageBox.Show($"Lets send");
             if (!ValidateInputs())
-
                 return;
 
             try
@@ -208,26 +258,34 @@ namespace EmailSender
                 var successCount = 0;
                 var errorCount = 0;
 
-                int delayMilliseconds = recipients.Count > 50 ? delaySeconds * 1000 : 0; // Если адресов больше 50, устанавливаем задержку, иначе 0
+                int emailsSent = 0;
+                int delayMilliseconds = delaySeconds * 1000; // Задержка в 1 час между итерациями
 
-                foreach (var recipient in recipients)
+                while (emailsSent < recipients.Count)
                 {
-                    if (delayMilliseconds > 0)
-                        await Task.Delay(delayMilliseconds); // Задержка между отправкой 50 сообщений в 1 час
-
-                    try
+                    for (int i = emailsSent; i < Math.Min(emailsSent + 50, recipients.Count); i++)
                     {
-                        await SendEmailAsync(recipient);
-                        successCount++;
-                        WriteToFile("good.txt", recipient);
-                    }
-                    catch (Exception ex)
-                    {
-                        errorCount++;
-                        WriteToFile("bad.txt", $"{recipient}: {ex.Message}");
+                        var recipient = recipients[i];
+                        try
+                        {
+                            await SendEmailAsync(recipient);
+                            successCount++;
+                            WriteToFile("good.txt", recipient);
+                        }
+                        catch (Exception ex)
+                        {
+                            errorCount++;
+                            WriteToFile("bad.txt", $"{recipient}: {ex.Message}");
+                        }
+
+                        progressBar.Value++;
                     }
 
-                    progressBar.Value++;
+                    emailsSent += 50;
+
+                    // Если не все письма отправлены, ждем 1 час перед следующей итерацией
+                    if (emailsSent < recipients.Count)
+                        await Task.Delay(delayMilliseconds);
                 }
 
                 MessageBox.Show($"Emails sent successfully: {successCount}, Failed: {errorCount}");
@@ -236,6 +294,27 @@ namespace EmailSender
             {
                 MessageBox.Show($"Failed to send emails: {ex.Message}");
             }
+        }   
+
+        private void messageTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            useRichTextBox = checkBox1.Checked;
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            useRichTextBoxTxt = checkBox1.Checked;
         }
     }
 }
