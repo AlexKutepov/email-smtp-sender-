@@ -46,29 +46,39 @@ namespace EmailSender
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(8, 432);
+            this.progressBar.Location = new System.Drawing.Point(27, 656);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(443, 23);
+            this.progressBar.Size = new System.Drawing.Size(782, 23);
             this.progressBar.TabIndex = 12;
             this.progressBar.Click += new System.EventHandler(this.progressBar_Click);
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(33, 403);
+            this.sendButton.Location = new System.Drawing.Point(27, 607);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(75, 23);
+            this.sendButton.Size = new System.Drawing.Size(170, 43);
             this.sendButton.TabIndex = 11;
             this.sendButton.Text = "send";
             this.sendButton.Click += new System.EventHandler(this.sendButton_Click_1);
             // 
             // fromNameTextBox
             // 
-            this.fromNameTextBox.Location = new System.Drawing.Point(33, 12);
+            this.fromNameTextBox.Location = new System.Drawing.Point(485, 36);
             this.fromNameTextBox.Name = "fromNameTextBox";
             this.fromNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.fromNameTextBox.TabIndex = 2;
@@ -76,16 +86,16 @@ namespace EmailSender
             // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(33, 137);
+            this.messageTextBox.Location = new System.Drawing.Point(27, 53);
             this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(404, 240);
+            this.messageTextBox.Size = new System.Drawing.Size(395, 548);
             this.messageTextBox.TabIndex = 3;
             this.messageTextBox.Text = resources.GetString("messageTextBox.Text");
             this.messageTextBox.TextChanged += new System.EventHandler(this.messageTextBox_TextChanged);
             // 
             // fromAddressTextBox
             // 
-            this.fromAddressTextBox.Location = new System.Drawing.Point(33, 38);
+            this.fromAddressTextBox.Location = new System.Drawing.Point(485, 75);
             this.fromAddressTextBox.Name = "fromAddressTextBox";
             this.fromAddressTextBox.Size = new System.Drawing.Size(100, 20);
             this.fromAddressTextBox.TabIndex = 4;
@@ -93,7 +103,7 @@ namespace EmailSender
             // 
             // subjectTextBox
             // 
-            this.subjectTextBox.Location = new System.Drawing.Point(33, 65);
+            this.subjectTextBox.Location = new System.Drawing.Point(485, 113);
             this.subjectTextBox.Name = "subjectTextBox";
             this.subjectTextBox.Size = new System.Drawing.Size(100, 20);
             this.subjectTextBox.TabIndex = 5;
@@ -102,47 +112,47 @@ namespace EmailSender
             // 
             // csvFileTextBox
             // 
-            this.csvFileTextBox.Location = new System.Drawing.Point(33, 92);
+            this.csvFileTextBox.Location = new System.Drawing.Point(485, 155);
             this.csvFileTextBox.Name = "csvFileTextBox";
-            this.csvFileTextBox.Size = new System.Drawing.Size(160, 20);
+            this.csvFileTextBox.Size = new System.Drawing.Size(111, 20);
             this.csvFileTextBox.TabIndex = 6;
             this.csvFileTextBox.Text = "example_base (1).csv";
             // 
             // smtpHostTextBox
             // 
-            this.smtpHostTextBox.Location = new System.Drawing.Point(193, 11);
+            this.smtpHostTextBox.Location = new System.Drawing.Point(663, 36);
             this.smtpHostTextBox.Name = "smtpHostTextBox";
-            this.smtpHostTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpHostTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpHostTextBox.TabIndex = 7;
             this.smtpHostTextBox.Text = "smtp-pulse.com";
             // 
             // smtpPortTextBox
             // 
-            this.smtpPortTextBox.Location = new System.Drawing.Point(193, 37);
+            this.smtpPortTextBox.Location = new System.Drawing.Point(663, 75);
             this.smtpPortTextBox.Name = "smtpPortTextBox";
-            this.smtpPortTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpPortTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpPortTextBox.TabIndex = 8;
             this.smtpPortTextBox.Text = "2525";
             // 
             // smtpUsernameTextBox
             // 
-            this.smtpUsernameTextBox.Location = new System.Drawing.Point(193, 64);
+            this.smtpUsernameTextBox.Location = new System.Drawing.Point(663, 113);
             this.smtpUsernameTextBox.Name = "smtpUsernameTextBox";
-            this.smtpUsernameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpUsernameTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpUsernameTextBox.TabIndex = 9;
             this.smtpUsernameTextBox.Text = "contact@astar-it.com";
             // 
             // smtpPasswordTextBox
             // 
-            this.smtpPasswordTextBox.Location = new System.Drawing.Point(200, 91);
+            this.smtpPasswordTextBox.Location = new System.Drawing.Point(663, 155);
             this.smtpPasswordTextBox.Name = "smtpPasswordTextBox";
-            this.smtpPasswordTextBox.Size = new System.Drawing.Size(100, 20);
+            this.smtpPasswordTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpPasswordTextBox.TabIndex = 10;
             // 
             // successCountLabel
             // 
             this.successCountLabel.AutoSize = true;
-            this.successCountLabel.Location = new System.Drawing.Point(314, 12);
+            this.successCountLabel.Location = new System.Drawing.Point(259, 607);
             this.successCountLabel.Name = "successCountLabel";
             this.successCountLabel.Size = new System.Drawing.Size(13, 13);
             this.successCountLabel.TabIndex = 13;
@@ -150,31 +160,31 @@ namespace EmailSender
             // 
             // messageRichTextBox
             // 
-            this.messageRichTextBox.Location = new System.Drawing.Point(455, 31);
+            this.messageRichTextBox.Location = new System.Drawing.Point(485, 232);
             this.messageRichTextBox.Name = "messageRichTextBox";
-            this.messageRichTextBox.Size = new System.Drawing.Size(317, 418);
+            this.messageRichTextBox.Size = new System.Drawing.Size(324, 418);
             this.messageRichTextBox.TabIndex = 14;
             this.messageRichTextBox.Text = "";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(455, 8);
+            this.checkBox1.Location = new System.Drawing.Point(485, 209);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(175, 17);
+            this.checkBox1.Size = new System.Drawing.Size(161, 17);
             this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "Пиьсма из листа, а не из cvs";
+            this.checkBox1.Text = "Mails from form,not from CVS";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(33, 118);
+            this.checkBox2.Location = new System.Drawing.Point(485, 186);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(147, 17);
+            this.checkBox2.Size = new System.Drawing.Size(136, 17);
             this.checkBox2.TabIndex = 16;
-            this.checkBox2.Text = "Пиьсма из Txt,а не CVS";
+            this.checkBox2.Text = "Mails from Txt, not CVS";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
@@ -183,9 +193,113 @@ namespace EmailSender
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(612, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Settings";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(444, 36);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(453, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Mail";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(436, 113);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Subject";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(615, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 13);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Smtp";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(620, 75);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(26, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Port";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(604, 113);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Mail Smtp";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(428, 158);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "csv/txt";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(604, 158);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "psw smtp";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(197, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(26, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Mail";
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(834, 961);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.messageRichTextBox);
@@ -229,6 +343,16 @@ namespace EmailSender
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
     }
 }
 
