@@ -19,6 +19,8 @@ namespace EmailSender
         private int smtpPort;
         private string smtpUsername;
         private string smtpPassword;
+        public int CountOfMailsForTime = 50;
+        public int MinutesForWaiting = 60;
 
         private int delaySeconds = 3600; // 1 час
 
@@ -261,9 +263,15 @@ namespace EmailSender
                 int emailsSent = 0;
                 int delayMilliseconds = delaySeconds * 1000; // Задержка в 1 час между итерациями
 
+                while (!HasInternetConnection())
+                {
+                    MessageBox.Show("No internet connection. Waiting for connection...");
+                    await Task.Delay(5000); // Проверяем каждые 5 секунд
+                }
+
                 while (emailsSent < recipients.Count)
                 {
-                    for (int i = emailsSent; i < Math.Min(emailsSent + 50, recipients.Count); i++)
+                    for (int i = emailsSent; i < Math.Min(emailsSent + CountOfMailsForTime, recipients.Count); i++)
                     {
                         var recipient = recipients[i];
                         try
@@ -281,11 +289,26 @@ namespace EmailSender
                         progressBar.Value++;
                     }
 
-                    emailsSent += 50;
+                    emailsSent += CountOfMailsForTime;
 
                     // Если не все письма отправлены, ждем 1 час перед следующей итерацией
                     if (emailsSent < recipients.Count)
-                        await Task.Delay(delayMilliseconds);
+                    {
+                        int remainingSeconds = delaySeconds;
+                        while (remainingSeconds > 0)
+                        {
+                            MessageBox.Show($"Next batch will be sent in {remainingSeconds} seconds.");
+                            await Task.Delay(1000);
+                            remainingSeconds--;
+
+                            // Проверяем доступ к интернету во время ожидания
+                            if (!HasInternetConnection())
+                            {
+                                MessageBox.Show("No internet connection. Resuming when connected...");
+                                break; // Прерываем ожидание и выходим из цикла
+                            }
+                        }
+                    }
                 }
 
                 MessageBox.Show($"Emails sent successfully: {successCount}, Failed: {errorCount}");
@@ -294,7 +317,25 @@ namespace EmailSender
             {
                 MessageBox.Show($"Failed to send emails: {ex.Message}");
             }
-        }   
+        }
+
+
+        private bool HasInternetConnection()
+        {
+            // Проверяем доступность какого-либо ресурса в интернете
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                using (var stream = client.OpenRead("https://ya.ru"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         private void messageTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -325,6 +366,31 @@ namespace EmailSender
         private void label8_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MailsForTime_TextChanged(object sender, EventArgs e)
+        {
+            try { 
+            CountOfMailsForTime = int.Parse(MailsForTime.Text);
+            
+            }
+            catch
+            {
+                MessageBox.Show($"Failed, need int number");
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                MinutesForWaiting = int.Parse(textBox2.Text);
+                delaySeconds = MinutesForWaiting * 60;
+            }
+            catch
+            {
+                MessageBox.Show($"Failed, need int number");
+            }
         }
     }
 }

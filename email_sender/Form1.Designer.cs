@@ -56,6 +56,10 @@ namespace EmailSender
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.MailsForTime = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.minutes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,9 +90,9 @@ namespace EmailSender
             // 
             // messageTextBox
             // 
-            this.messageTextBox.Location = new System.Drawing.Point(27, 53);
+            this.messageTextBox.Location = new System.Drawing.Point(27, 24);
             this.messageTextBox.Name = "messageTextBox";
-            this.messageTextBox.Size = new System.Drawing.Size(395, 548);
+            this.messageTextBox.Size = new System.Drawing.Size(395, 577);
             this.messageTextBox.TabIndex = 3;
             this.messageTextBox.Text = resources.GetString("messageTextBox.Text");
             this.messageTextBox.TextChanged += new System.EventHandler(this.messageTextBox_TextChanged);
@@ -148,6 +152,7 @@ namespace EmailSender
             this.smtpPasswordTextBox.Name = "smtpPasswordTextBox";
             this.smtpPasswordTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpPasswordTextBox.TabIndex = 10;
+            this.smtpPasswordTextBox.Text = "79krmkNPKp";
             // 
             // successCountLabel
             // 
@@ -160,16 +165,16 @@ namespace EmailSender
             // 
             // messageRichTextBox
             // 
-            this.messageRichTextBox.Location = new System.Drawing.Point(485, 232);
+            this.messageRichTextBox.Location = new System.Drawing.Point(428, 232);
             this.messageRichTextBox.Name = "messageRichTextBox";
-            this.messageRichTextBox.Size = new System.Drawing.Size(324, 418);
+            this.messageRichTextBox.Size = new System.Drawing.Size(381, 418);
             this.messageRichTextBox.TabIndex = 14;
             this.messageRichTextBox.Text = "";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(485, 209);
+            this.checkBox1.Location = new System.Drawing.Point(428, 208);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(161, 17);
             this.checkBox1.TabIndex = 15;
@@ -180,7 +185,7 @@ namespace EmailSender
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(485, 186);
+            this.checkBox2.Location = new System.Drawing.Point(428, 185);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(136, 17);
             this.checkBox2.TabIndex = 16;
@@ -285,11 +290,51 @@ namespace EmailSender
             this.label10.TabIndex = 26;
             this.label10.Text = "Mail";
             // 
+            // MailsForTime
+            // 
+            this.MailsForTime.Location = new System.Drawing.Point(678, 185);
+            this.MailsForTime.Name = "MailsForTime";
+            this.MailsForTime.Size = new System.Drawing.Size(131, 20);
+            this.MailsForTime.TabIndex = 27;
+            this.MailsForTime.Text = "50";
+            this.MailsForTime.TextChanged += new System.EventHandler(this.MailsForTime_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(604, 189);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(68, 13);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Mails for time";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(678, 208);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(131, 20);
+            this.textBox2.TabIndex = 29;
+            this.textBox2.Text = "60";
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // minutes
+            // 
+            this.minutes.AutoSize = true;
+            this.minutes.Location = new System.Drawing.Point(592, 211);
+            this.minutes.Name = "minutes";
+            this.minutes.Size = new System.Drawing.Size(80, 13);
+            this.minutes.TabIndex = 30;
+            this.minutes.Text = "minutes for wait";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 961);
+            this.ClientSize = new System.Drawing.Size(834, 681);
+            this.Controls.Add(this.minutes);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.MailsForTime);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -353,6 +398,10 @@ namespace EmailSender
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox MailsForTime;
+        private System.Windows.Forms.Label minutes;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label11;
     }
 }
 
