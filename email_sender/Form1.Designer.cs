@@ -60,6 +60,11 @@ namespace EmailSender
             this.label11 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.minutes = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.stopButton = new System.Windows.Forms.Button();
+            this.pauseButton = new System.Windows.Forms.Button();
+            this.resumeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +80,7 @@ namespace EmailSender
             // 
             this.sendButton.Location = new System.Drawing.Point(27, 607);
             this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(170, 43);
+            this.sendButton.Size = new System.Drawing.Size(74, 43);
             this.sendButton.TabIndex = 11;
             this.sendButton.Text = "send";
             this.sendButton.Click += new System.EventHandler(this.sendButton_Click_1);
@@ -152,12 +157,11 @@ namespace EmailSender
             this.smtpPasswordTextBox.Name = "smtpPasswordTextBox";
             this.smtpPasswordTextBox.Size = new System.Drawing.Size(146, 20);
             this.smtpPasswordTextBox.TabIndex = 10;
-            this.smtpPasswordTextBox.Text = "79krmkNPKp";
             // 
             // successCountLabel
             // 
             this.successCountLabel.AutoSize = true;
-            this.successCountLabel.Location = new System.Drawing.Point(259, 607);
+            this.successCountLabel.Location = new System.Drawing.Point(428, 604);
             this.successCountLabel.Name = "successCountLabel";
             this.successCountLabel.Size = new System.Drawing.Size(13, 13);
             this.successCountLabel.TabIndex = 13;
@@ -165,9 +169,9 @@ namespace EmailSender
             // 
             // messageRichTextBox
             // 
-            this.messageRichTextBox.Location = new System.Drawing.Point(428, 232);
+            this.messageRichTextBox.Location = new System.Drawing.Point(595, 232);
             this.messageRichTextBox.Name = "messageRichTextBox";
-            this.messageRichTextBox.Size = new System.Drawing.Size(381, 418);
+            this.messageRichTextBox.Size = new System.Drawing.Size(214, 418);
             this.messageRichTextBox.TabIndex = 14;
             this.messageRichTextBox.Text = "";
             // 
@@ -326,11 +330,58 @@ namespace EmailSender
             this.minutes.TabIndex = 30;
             this.minutes.Text = "minutes for wait";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(428, 617);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(13, 13);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(428, 637);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(31, 13);
+            this.label13.TabIndex = 32;
+            this.label13.Text = "finish";
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(107, 607);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(74, 43);
+            this.stopButton.TabIndex = 33;
+            this.stopButton.Text = "stop";
+            // 
+            // pauseButton
+            // 
+            this.pauseButton.Location = new System.Drawing.Point(187, 607);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(74, 43);
+            this.pauseButton.TabIndex = 34;
+            this.pauseButton.Text = "pause";
+            // 
+            // resumeButton
+            // 
+            this.resumeButton.Location = new System.Drawing.Point(267, 607);
+            this.resumeButton.Name = "resumeButton";
+            this.resumeButton.Size = new System.Drawing.Size(74, 43);
+            this.resumeButton.TabIndex = 35;
+            this.resumeButton.Text = "resume";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 681);
+            this.Controls.Add(this.resumeButton);
+            this.Controls.Add(this.pauseButton);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.minutes);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label11);
@@ -402,6 +453,11 @@ namespace EmailSender
         private System.Windows.Forms.Label minutes;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button resumeButton;
+        private System.Windows.Forms.Button pauseButton;
+        private System.Windows.Forms.Button stopButton;
     }
 }
 

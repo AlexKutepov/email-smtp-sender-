@@ -246,9 +246,27 @@ namespace EmailSender
             successCountLabel.Text = $"Successfully sent: {successCount}";
         }
 
+        private bool stopSending = false;
+        private bool paused = false;
+
+        private async void stopButton_Click(object sender, EventArgs e)
+        {
+            stopSending = true;
+        }
+
+        private void pauseButton_Click(object sender, EventArgs e)
+        {
+            paused = true;
+        }
+
+        private void resumeButton_Click(object sender, EventArgs e)
+        {
+            paused = false;
+        }
+
         private async void sendButton_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show($"Lets send");
+            label13.Text = $"Lets send!";
             if (!ValidateInputs())
                 return;
 
@@ -265,14 +283,27 @@ namespace EmailSender
 
                 while (!HasInternetConnection())
                 {
-                    MessageBox.Show("No internet connection. Waiting for connection...");
+                   // MessageBox.Show("No internet connection. Waiting for connection...");
                     await Task.Delay(5000); // Проверяем каждые 5 секунд
                 }
 
-                while (emailsSent < recipients.Count)
+                while (emailsSent < recipients.Count && !stopSending)
                 {
                     for (int i = emailsSent; i < Math.Min(emailsSent + CountOfMailsForTime, recipients.Count); i++)
                     {
+                        if (paused)
+                        {
+                            while (paused)
+                            {
+                                await Task.Delay(1000); // Ждем пока не нажмут "Продолжить"
+                            }
+                        }
+
+                        if (stopSending)
+                        {
+                            stopSending = false;
+                            break; // Остановка отправки
+                        }
                         var recipient = recipients[i];
                         try
                         {
@@ -284,6 +315,7 @@ namespace EmailSender
                         {
                             errorCount++;
                             WriteToFile("bad.txt", $"{recipient}: {ex.Message}");
+                            label12.Text = $"{recipient}: {ex.Message}";
                         }
 
                         progressBar.Value++;
@@ -297,25 +329,20 @@ namespace EmailSender
                         int remainingSeconds = delaySeconds;
                         while (remainingSeconds > 0)
                         {
-                            MessageBox.Show($"Next batch will be sent in {remainingSeconds} seconds.");
+                            label12.Text = $"Next mails will be sent in {remainingSeconds/60} min.";
                             await Task.Delay(1000);
                             remainingSeconds--;
 
-                            // Проверяем доступ к интернету во время ожидания
-                            if (!HasInternetConnection())
-                            {
-                                MessageBox.Show("No internet connection. Resuming when connected...");
-                                break; // Прерываем ожидание и выходим из цикла
-                            }
+                         
                         }
                     }
                 }
 
-                MessageBox.Show($"Emails sent successfully: {successCount}, Failed: {errorCount}");
+                label13.Text=  $"Emails sent successfully: {successCount}, Failed: {errorCount}";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to send emails: {ex.Message}");
+                label13.Text = $"Failed to send emails: {ex.Message}";
             }
         }
 
