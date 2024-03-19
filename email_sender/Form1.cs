@@ -281,12 +281,6 @@ namespace EmailSender
                 int emailsSent = 0;
                 int delayMilliseconds = delaySeconds * 1000; // Задержка в 1 час между итерациями
 
-                while (!HasInternetConnection())
-                {
-                   // MessageBox.Show("No internet connection. Waiting for connection...");
-                    await Task.Delay(5000); // Проверяем каждые 5 секунд
-                }
-
                 while (emailsSent < recipients.Count && !stopSending)
                 {
                     for (int i = emailsSent; i < Math.Min(emailsSent + CountOfMailsForTime, recipients.Count); i++)
@@ -304,6 +298,15 @@ namespace EmailSender
                             stopSending = false;
                             break; // Остановка отправки
                         }
+
+
+                        while (!HasInternetConnection())
+                        {
+                            // MessageBox.Show("No internet connection. Waiting for connection...");
+                            await Task.Delay(5000); // Проверяем каждые 5 секунд
+                        }
+
+
                         var recipient = recipients[i];
                         try
                         {

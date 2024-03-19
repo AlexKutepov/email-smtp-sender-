@@ -29,7 +29,6 @@ namespace EmailSender
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.sendButton = new System.Windows.Forms.Button();
             this.fromNameTextBox = new System.Windows.Forms.TextBox();
@@ -99,7 +98,7 @@ namespace EmailSender
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.Size = new System.Drawing.Size(395, 577);
             this.messageTextBox.TabIndex = 3;
-            this.messageTextBox.Text = resources.GetString("messageTextBox.Text");
+            this.messageTextBox.Text = "";
             this.messageTextBox.TextChanged += new System.EventHandler(this.messageTextBox_TextChanged);
             // 
             // fromAddressTextBox
